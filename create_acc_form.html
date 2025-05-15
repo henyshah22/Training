@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Account</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .form-container {
+        background-color: #f9f9f9;
+        padding: 30px 40px;
+        border-radius: 10px;
+        width: 600px;
+        border: 18px solid #4444449f;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .form-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        margin-top: -10px;
+      }
+
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px 20px;
+      }
+
+      label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 3px;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      input[type="number"],
+      select,
+      textarea {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .full-width {
+        grid-column: 1 / -1;
+      }
+
+      .hobbies {
+        display: flex;
+      }
+
+      .income-range {
+        align-items: center;
+        gap: 10px;
+      }
+
+      input[type="range"] {
+        flex: 1;
+      }
+
+      .submit-btn button {
+        padding: 10px 25px;
+        background-color: #00b894;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>Create Account</h2>
+      <hr />
+      <form>
+        <div>
+          <label style="color: #00b894">First name *</label>
+          <input type="text" placeholder="enter your first name" />
+        </div>
+        <div>
+          <label style="color: #00b894">Last name</label>
+          <input type="text" placeholder="enter your last name" />
+        </div>
+        <div class="full-width" style="color: #00b894">
+          <label>Email*</label>
+          <input type="email" placeholder="enter your email" />
+        </div>
+        <div>
+          <label style="color: #00b894">Password *</label>
+          <input type="password" placeholder="enter your password" />
+        </div>
+        <div>
+          <label style="color: #00b894">Confirm Password *</label>
+          <input type="password" placeholder="enter your password again" />
+        </div>
+        <div class="gender">
+          <label style="color: #00b894">Gender:</label>
+          <label style="font-weight: 500"
+            ><input type="radio" name="gender" /> Male</label
+          >
+          <label style="font-weight: 500"
+            ><input type="radio" name="gender" /> Female</label
+          >
+        </div>
+        <div>
+          <label style="color: #00b894">Hobbies</label>
+          <div class="hobbies">
+            <label style="font-weight: 400"
+              ><input type="checkbox" /> Music</label
+            >
+            <label style="font-weight: 400"
+              ><input type="checkbox" /> Sports</label
+            >
+            <label style="font-weight: 400"
+              ><input type="checkbox" /> Travel</label
+            >
+            <label style="font-weight: 400"
+              ><input type="checkbox" /> Movies</label
+            >
+          </div>
+        </div>
+        <div>
+          <label style="color: #00b894">Source of Income</label>
+          <select>
+            <option>Employed</option>
+            <option>Self-employed</option>
+          </select>
+        </div>
+        <div class="income-range">
+          <label style="color: #00b894">Income</label>
+          <input type="range" min="0" max="20000" value="0" />
+          <span
+            style="background-color: #00b894; color: white; border-radius: 3px"
+            >20K</span
+          >
+        </div>
+        <div>
+          <label style="color: #00b894">Upload Profile Picture</label>
+          <input type="file" />
+        </div>
+        <div>
+          <label style="color: #00b894">Age</label>
+          <input type="number" value="18" />
+        </div>
+        <div class="full-width">
+          <label style="color: #00b894">Bio</label>
+          <textarea rows="3"></textarea>
+        </div>
+        <div
+          class="submit-btn"
+          style="color: #00b894; margin-left: 175%; margin-bottom: -12px"
+        >
+          <button type="submit">Create</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
