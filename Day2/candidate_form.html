@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Candidate Form</title>
+    <link rel="stylesheet" href="can_form.css" />
+  </head>
+  <body>
+    <div class="form-container">
+      <form>
+        <div class="section">
+          <div class="section-header">
+            <div class="circle-number" style="margin-top: -12px">1</div>
+
+            <h2
+              style="
+                font-family: 'Times New Roman', Times, serif;
+                margin-top: 5px;
+              "
+            >
+              Candidate Info
+            </h2>
+          </div>
+          <input type="text" placeholder="Your Name *" required />
+          <input type="email" placeholder="Your Email *" required />
+          <textarea placeholder="About yourself"></textarea>
+
+          <label
+            class="label"
+            for="interests"
+            style="font-family: 'Times New Roman', Times, serif"
+            >Interests:</label
+          >
+          <select id="interests">
+            <option selected>Fishkeeping</option>
+          </select>
+        </div>
+
+        <div class="section">
+          <div class="section-header">
+            <div class="circle-number" style="margin-top: -12px">2</div>
+            <h2
+              style="
+                font-family: 'Times New Roman', Times, serif;
+                margin-top: 5px;
+              "
+            >
+              Additional Info
+            </h2>
+          </div>
+          <textarea placeholder="About Your School"></textarea>
+        </div>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>

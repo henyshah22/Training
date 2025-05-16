@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Firebase Login Form</title>
+    <link rel="stylesheet" href="layout.css" />
+  </head>
+  <body>
+    <div class="form-container">
+      <form id="loginForm" style="margin-right: 24px">
+        <h2>User Login</h2>
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          placeholder="Enter your email"
+          required
+        />
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="Enter your password"
+          required
+        />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/11.7.3/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.7.3/firebase-database-compat.js"></script>
+
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyArLOC3eIzB1ZD7vk9Yp6ez3anfqs2XCcc",
+        authDomain: "login-form-dab6c.firebaseapp.com",
+        databaseURL: "https://login-form-dab6c-default-rtdb.firebaseio.com",
+        projectId: "login-form-dab6c",
+        storageBucket: "login-form-dab6c.appspot.com",
+        messagingSenderId: "204586363915",
+        appId: "1:204586363915:web:4782bd4e680a23cc5b2b0e",
+        measurementId: "G-DKKB3L7WQR",
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const database = firebase.database();
+
+      // Handle form submission
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+
+          const userId = email.replace(/[.@]/g, "_");
+
+          // Save to Firebase
+          firebase
+            .database()
+            .ref("users/" + userId)
+            .set({
+              email: email,
+              password: password,
+            })
+            .then(() => {
+              alert("User data saved to Firebase!");
+              document.getElementById("loginForm").reset();
+            })
+            .catch((error) => {
+              console.error("Error saving data:", error);
+            });
+        });
+    </script>
+  </body>
+</html>
