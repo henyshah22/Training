@@ -1,0 +1,39 @@
+<!-- Create a program which will display the time remaining for the lunch. ex. lunch time: 1:00 PM, timenow : 10:30. Time remaining : 2:30 -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lunch Countdown</title>
+  </head>
+  <body>
+    <h3>Time remaining for lunch (1:00 PM):</h3>
+    <p id="output">Calculating...</p>
+
+    <script>
+      function updateLunchCountdown() {
+        const now = new Date();
+        const lunch = new Date();
+
+        lunch.setHours(13, 0, 0, 0);
+
+        let diff = lunch - now;
+
+        if (diff <= 0) {
+          document.getElementById("output").textContent = "00:00";
+          return;
+        }
+
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+
+        const formatted = `${String(hours).padStart(2, "0")}:${String(
+          minutes
+        ).padStart(2, "0")}`;
+        document.getElementById("output").textContent = formatted;
+      }
+
+      updateLunchCountdown();
+      setInterval(updateLunchCountdown, 60000);
+    </script>
+  </body>
+</html>

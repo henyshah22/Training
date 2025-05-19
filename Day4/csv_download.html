@@ -1,0 +1,62 @@
+<!-- Build a web page with an image table viewer that allows users to upload a CSV file containing links to images on the web. The table should display the images in rows, and each row should have a download button for the corresponding image. -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Image CSV Viewer</title>
+  </head>
+  <body>
+    <h2>Upload CSV with Image URLs</h2>
+    <input type="file" id="csvInput" accept=".csv" />
+    <table border="1" id="imageTable">
+      <tr>
+        <th>Image</th>
+        <th>Download</th>
+      </tr>
+    </table>
+
+    <script>
+      document
+        .getElementById("csvInput")
+        .addEventListener("change", function (event) {
+          const file = event.target.files[0];
+          if (!file) return;
+
+          const reader = new FileReader();
+
+          reader.onload = function (e) {
+            const lines = e.target.result.split("\n");
+            const table = document.getElementById("imageTable");
+
+            lines.forEach((url) => {
+              const trimmed = url.trim();
+              if (trimmed === "") return;
+
+              const row = document.createElement("tr");
+
+              const imgCell = document.createElement("td");
+              const img = document.createElement("img");
+              img.src = trimmed;
+              img.width = 100;
+              img.onerror = () => (img.alt = "Image load error");
+              imgCell.appendChild(img);
+
+              const downloadCell = document.createElement("td");
+              const link = document.createElement("a");
+              link.href = trimmed;
+              link.textContent = "Download";
+              link.download = "";
+              link.target = "_blank";
+              downloadCell.appendChild(link);
+
+              row.appendChild(imgCell);
+              row.appendChild(downloadCell);
+              table.appendChild(row);
+            });
+          };
+
+          reader.readAsText(file);
+        });
+    </script>
+  </body>
+</html>

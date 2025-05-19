@@ -1,0 +1,42 @@
+<!-- Create a program which will display the time remaining from the current date to the entered date. -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Time Remaining</title>
+  </head>
+  <body>
+    <h3>Enter a future date:</h3>
+    <input type="datetime-local" id="targetDate" />
+    <p id="output">Waiting for input...</p>
+
+    <script>
+      const input = document.getElementById("targetDate");
+      const output = document.getElementById("output");
+      let timer;
+
+      input.addEventListener("change", () => {
+        clearInterval(timer);
+        const target = new Date(input.value);
+
+        timer = setInterval(() => {
+          const now = new Date();
+          const diff = target - now;
+
+          if (diff <= 0) {
+            clearInterval(timer);
+            output.textContent = "Time's up!";
+            return;
+          }
+
+          const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+          const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+          const m = Math.floor((diff / (1000 * 60)) % 60);
+          const s = Math.floor((diff / 1000) % 60);
+
+          output.textContent = `${d}d ${h}h ${m}m ${s}s remaining`;
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>

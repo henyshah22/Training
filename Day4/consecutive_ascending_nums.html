@@ -1,0 +1,38 @@
+<!-- Create a separate group for consecutive ascending numbers from the given string.
+ex: 1235689. Output : 123 56 89 -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Consecutive Ascending Numbers</title>
+  </head>
+  <body>
+    <h3>Enter a number string:</h3>
+    <input type="text" id="input" placeholder="e.g. 1235689" />
+    <p id="output"></p>
+
+    <script>
+      function groupConsecutive(str) {
+        let result = "";
+        let temp = str[0];
+
+        for (let i = 1; i < str.length; i++) {
+          if (parseInt(str[i]) === parseInt(str[i - 1]) + 1) {
+            temp += str[i];
+          } else {
+            result += temp + " ";
+            temp = str[i];
+          }
+        }
+        result += temp;
+        return result;
+      }
+
+      document.getElementById("input").addEventListener("input", function () {
+        const input = this.value;
+        const output = groupConsecutive(input);
+        document.getElementById("output").textContent = output;
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+<!-- Create a local text file that contains words in it. Using JavaScript read the words from a text file and create a recursive function that identifies the very first item that has recurred in the word. It returns the identified item with the index where it first appeared and the very next index where it reappeared - entirely as an object.
+Ex.first word from file - “BTEJHBERSD” ➞ {“E”: [2, 6]}
+2nd word from file - “JPDETRETXD” ➞ {“E”: [3, 6]}
+… and go on. -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>First Recurring Character Finder</title>
+  </head>
+  <body>
+    <h3>Select a text file with one word per line</h3>
+    <input type="file" id="fileInput" accept=".txt" />
+    <pre id="output"></pre>
+
+    <script>
+      document
+        .getElementById("fileInput")
+        .addEventListener("change", function (event) {
+          const file = event.target.files[0];
+          if (!file) return;
+
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const lines = e.target.result.split(/\r?\n/);
+            const results = [];
+
+            lines.forEach((word) => {
+              const result = findFirstRecurring(word.trim());
+              if (result) results.push(`${word} ➞ ${JSON.stringify(result)}`);
+            });
+
+            document.getElementById("output").textContent = results.join("\n");
+          };
+          reader.readAsText(file);
+        });
+
+      function findFirstRecurring(word, seen = {}, index = 0) {
+        if (index >= word.length) return null;
+
+        const char = word[index];
+        if (seen.hasOwnProperty(char)) {
+          return { [char]: [seen[char], index] };
+        }
+
+        seen[char] = index;
+        return findFirstRecurring(word, seen, index + 1);
+      }
+    </script>
+  </body>
+</html>
