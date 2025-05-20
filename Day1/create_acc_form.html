@@ -64,6 +64,7 @@
       .income-range {
         align-items: center;
         gap: 10px;
+        display: flex;
       }
 
       input[type="range"] {
@@ -78,16 +79,23 @@
         border-radius: 5px;
         cursor: pointer;
       }
+
+      .error-message {
+        color: red;
+        font-size: 0.9em;
+        margin-top: 5px;
+        grid-column: 1 / -1;
+      }
     </style>
   </head>
   <body>
     <div class="form-container">
       <h2>Create Account</h2>
       <hr />
-      <form>
+      <form id="createAccountForm" novalidate>
         <div>
           <label style="color: #00b894">First name *</label>
-          <input type="text" placeholder="enter your first name" />
+          <input type="text" placeholder="enter your first name" required />
         </div>
         <div>
           <label style="color: #00b894">Last name</label>
@@ -95,15 +103,28 @@
         </div>
         <div class="full-width" style="color: #00b894">
           <label>Email*</label>
-          <input type="email" placeholder="enter your email" />
+          <input type="email" placeholder="enter your email" required />
         </div>
         <div>
           <label style="color: #00b894">Password *</label>
-          <input type="password" placeholder="enter your password" />
+          <input
+            type="password"
+            placeholder="enter your password"
+            id="password"
+            required
+          />
         </div>
         <div>
           <label style="color: #00b894">Confirm Password *</label>
-          <input type="password" placeholder="enter your password again" />
+          <input
+            type="password"
+            placeholder="enter your password again"
+            id="confirmPassword"
+            required
+          />
+          <div id="passwordError" class="error-message" style="display: none">
+            Passwords do not match.
+          </div>
         </div>
         <div class="gender">
           <label style="color: #00b894">Gender:</label>
@@ -140,10 +161,18 @@
         </div>
         <div class="income-range">
           <label style="color: #00b894">Income</label>
-          <input type="range" min="0" max="20000" value="0" />
+          <input type="range" min="0" max="20000" value="0" id="incomeRange" />
           <span
-            style="background-color: #00b894; color: white; border-radius: 3px"
-            >20K</span
+            id="incomeValue"
+            style="
+              background-color: #00b894;
+              color: white;
+              border-radius: 3px;
+              padding: 2px 6px;
+              min-width: 40px;
+              text-align: center;
+            "
+            >0</span
           >
         </div>
         <div>
@@ -166,5 +195,39 @@
         </div>
       </form>
     </div>
+
+    <script>
+      const incomeRange = document.getElementById("incomeRange");
+      const incomeValue = document.getElementById("incomeValue");
+
+      incomeValue.textContent = formatIncome(incomeRange.value);
+
+      incomeRange.addEventListener("input", () => {
+        incomeValue.textContent = formatIncome(incomeRange.value);
+      });
+
+      function formatIncome(value) {
+        if (value >= 1000) {
+          return (value / 1000).toFixed(value % 1000 === 0 ? 0 : 1) + "K";
+        }
+        return value;
+      }
+
+      const form = document.getElementById("createAccountForm");
+      const password = document.getElementById("password");
+      const confirmPassword = document.getElementById("confirmPassword");
+      const passwordError = document.getElementById("passwordError");
+
+      form.addEventListener("submit", (e) => {
+        passwordError.style.display = "none";
+
+        if (password.value !== confirmPassword.value) {
+          e.preventDefault();
+          s;
+          passwordError.style.display = "block";
+          confirmPassword.focus();
+        }
+      });
+    </script>
   </body>
 </html>
