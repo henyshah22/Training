@@ -46,3 +46,13 @@ function validateLogin() {
 
   return false;
 }
+
+function displayWelcomeName() {
+  const storedUser = JSON.parse(localStorage.getItem("registeredUser"));
+  if (storedUser && storedUser.name) {
+    document.getElementById("welcomeName").textContent = storedUser.name;
+  }
+}
+if (window.location.pathname.includes("welcome.html")) {
+  displayWelcomeName();
+}
