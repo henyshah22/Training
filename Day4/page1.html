@@ -16,7 +16,7 @@
       .grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(3, 1fr);
+        grid-template-rows: repeat(5, 1fr);
         width: 100vw;
         height: 100vh;
         position: absolute;
@@ -44,16 +44,21 @@
     </style>
   </head>
   <body>
-    <div class="grid">
-      <div class="cell"><div class="circle"></div></div>
-      <div class="cell"><div class="circle"></div></div>
-      <div class="cell"><div class="circle"></div></div>
-      <div class="cell"><div class="circle"></div></div>
-      <div class="cell"><div class="circle"></div></div>
-      <div class="cell"><div class="circle"></div></div>
-      <div class="cell"><div class="circle"></div></div>
-      <div class="cell"><div class="circle"></div></div>
-      <div class="cell"><div class="circle"></div></div>
-    </div>
+    <div class="grid" id="grid-container"></div>
+
+    <script>
+      const grid = document.getElementById("grid-container");
+
+      for (let i = 0; i < 15; i++) {
+        const cell = document.createElement("div");
+        cell.className = "cell";
+
+        const circle = document.createElement("div");
+        circle.className = "circle";
+
+        cell.appendChild(circle);
+        grid.appendChild(cell);
+      }
+    </script>
   </body>
 </html>
