@@ -4,7 +4,7 @@ const products = [
     name: "Smartphone",
     price: 299.99,
     category: "electronics",
-    image: "D:/Training/Day5/images/smartphone.jpg",
+    image: "images/smartphone.jpg",
     description: "Latest model with advanced features.",
   },
   {
@@ -12,7 +12,7 @@ const products = [
     name: "T-Shirt",
     price: 19.99,
     category: "clothing",
-    image: "D:/Training/Day5/images/tshirt.webp",
+    image: "images/tshirt.webp",
     description: "Comfortable cotton t-shirt.",
   },
   {
@@ -20,7 +20,7 @@ const products = [
     name: "Watch",
     price: 49.99,
     category: "accessories",
-    image: "D:/Training/Day5/images/watch.jpg",
+    image: "images/watch.jpg",
     description: "Stylish wristwatch.",
   },
 ];
