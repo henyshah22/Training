@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fashion</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="custom-navbar">
+      <div class="custom-navbar-container">
+        <ul class="menu-items">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li>
+            <a href="cart.html">Cart (<span id="cart-item-count">0</span>)</a>
+          </li>
+          <!-- <li><a href="checkout.html">Checkout</a></li> -->
+        </ul>
+        <div class="logo">
+          <img src="https://i.postimg.cc/TP6JjSTt/logo.webp" alt="" />
+        </div>
+      </div>
+    </nav>
+    <section id="home">
+      <div class="home_page">
+        <div class="home_img">
+          <img src="https://i.postimg.cc/t403yfn9/home2.jpg" alt="img " />
+        </div>
+        <div class="home_txt">
+          <p class="collectio">SUMMER COLLECTION</p>
+          <h2>FALL - WINTER<br />Collection 2025</h2>
+          <div class="home_label">
+            <p>
+              A specialist label creating luxury essentials. Ethically
+              crafted<br />with an unwavering commitment to exceptional quality.
+            </p>
+          </div>
+          <button>
+            <a href="#sellers">SHOP NOW</a><i class="bx bx-right-arrow-alt"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+    <div class="search-section container">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search products by name..."
+      />
+      <button id="searchButton">Search</button>
+    </div>
+
+    <section id="collection">
+      <div class="collections container">
+        <div class="content">
+          <img src="https://i.postimg.cc/Xqmwr12c/clothing.webp" alt="img" />
+          <div class="img-content">
+            <p>Clothing Collections</p>
+            <button><a href="#sellers">SHOP NOW</a></button>
+          </div>
+        </div>
+        <div class="content2">
+          <img src="https://i.postimg.cc/8CmBZH5N/shoes.webp" alt="img" />
+          <div class="img-content2">
+            <p>Shoes Spring</p>
+            <button><a href="#sellers">SHOP NOW</a></button>
+          </div>
+        </div>
+        <div class="content3">
+          <img src="https://i.postimg.cc/MHv7KJYp/access.webp" alt="img" />
+          <div class="img-content3">
+            <p>Accessories</p>
+            <button><a href="#sellers">SHOP NOW</a></button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="sellers">
+      <div class="seller container">
+        <h2>Top Sales</h2>
+        <div class="best-seller" id="top-sales-container"></div>
+      </div>
+      <div class="seller container">
+        <h2>New Arrivals</h2>
+        <div class="best-seller" id="new-arrivals-container"></div>
+      </div>
+      <div class="seller container">
+        <h2>Hot Sales</h2>
+        <div class="best-seller" id="hot-sales-container"></div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="f-design">
+        <div class="f-design-txt container">
+          <p>© 2025 E-Shop. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+      import {
+        getDatabase,
+        ref,
+        onValue,
+      } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBRCfSCWNmL0W2dvS-AxpSSYocjaM32coo",
+        authDomain: "e-shopping-baacc.firebaseapp.com",
+        projectId: "e-shopping-baacc",
+        storageBucket: "e-shopping-baacc.firebasestorage.app",
+        messagingSenderId: "188192593595",
+        appId: "1:188192593595:web:6bde8a346d1bcc64cabb9e",
+        measurementId: "G-MQG7S3CFZ2",
+        databaseURL: "https://e-shopping-baacc-default-rtdb.firebaseio.com",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const database = getDatabase(app);
+
+      function loadProductsByCategoryId(categoryId, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) {
+          console.error(`Container with ID '${containerId}' not found.`);
+          return;
+        }
+
+        container.innerHTML = "";
+
+        const productsRef = ref(database, "products");
+
+        onValue(
+          productsRef,
+          (snapshot) => {
+            const products = snapshot.val();
+            container.innerHTML = "";
+
+            if (!products) {
+              container.innerHTML = "<p>No products available.</p>";
+              return;
+            }
+
+            let found = false;
+
+            for (const key in products) {
+              const product = products[key];
+
+              const prodCategoryId =
+                typeof product.categoryid === "string"
+                  ? Number(product.categoryid)
+                  : product.categoryid;
+
+              if (prodCategoryId === categoryId) {
+                found = true;
+
+                const div = document.createElement("div");
+                div.className = "best-p1";
+                div.innerHTML = `
+        <img src="${product.imageURL || product.image}" alt="${product.name}">
+        <div class="best-p1-txt">
+          <div class="name-of-p">
+            <p>${product.name}</p>
+          </div>
+          <div class="price">$${product.price}</div>
+          <div class="buy-now">
+            <button>
+              <a href="product.html?id=${key}">View Details</a>
+            </button>
+          </div>
+        </div>
+      `;
+
+                container.appendChild(div);
+              }
+            }
+
+            if (!found) {
+              container.innerHTML = `<p>No products found for categoryId: ${categoryId}</p>`;
+            }
+          },
+          (error) => {
+            console.error("Error loading products:", error);
+            container.innerHTML = `<p style="color:red;">Failed to load products. Please try again later.</p>`;
+          }
+        );
+      }
+
+      loadProductsByCategoryId(1, "top-sales-container");
+      loadProductsByCategoryId(2, "new-arrivals-container");
+      loadProductsByCategoryId(3, "hot-sales-container");
+      function searchProducts() {
+        const searchTerm = document
+          .getElementById("searchInput")
+          .value.trim()
+          .toLowerCase();
+        searchResults(1, "top-sales-container", searchTerm);
+        searchResults(2, "new-arrivals-container", searchTerm);
+        searchResults(3, "hot-sales-container", searchTerm);
+      }
+      function searchResults(categoryid, containerId, inputvalue) {
+        const container = document.getElementById(containerId);
+        if (!container) {
+          console.error(`Container with ID '${containerId}' not found.`);
+          return;
+        }
+
+        container.innerHTML = "";
+        const productsRef = ref(database, "products");
+        onValue(
+          productsRef,
+          (snapshot) => {
+            const products = snapshot.val();
+            let found = false;
+
+            for (const key in products) {
+              const product = products[key];
+              const prodCategoryId =
+                typeof product.categoryid === "string"
+                  ? Number(product.categoryid)
+                  : product.categoryid;
+
+              if (
+                product.name &&
+                product.name.toLowerCase().includes(inputvalue) &&
+                prodCategoryId === categoryid
+              ) {
+                found = true;
+                const div = document.createElement("div");
+                div.className = "best-p1";
+                div.innerHTML = `
+                  <img src="${product.imageURL || product.image}" alt="${
+                  product.name
+                }">
+                  <div class="best-p1-txt">
+                    <div class="name-of-p">
+                      <p>${product.name}</p>
+                    </div>
+                    <div class="price">$${product.price}</div>
+                    <div class="buy-now">
+                      <button> <a href="product.html?id=${key}">View Details</a></button>
+                    </div>
+                  </div>
+                `;
+                container.appendChild(div);
+              }
+            }
+
+            if (!found) {
+              container.innerHTML = `<p>No products found matching "${inputvalue}".</p>`;
+            }
+          },
+          (error) => {
+            console.error("Error searching products:", error);
+            container.innerHTML = `<p style="color:red;">Search failed. Try again later.</p>`;
+          },
+          {
+            onlyOnce: true,
+          }
+        );
+      }
+      document
+        .getElementById("searchButton")
+        .addEventListener("click", searchProducts);
+    </script>
+    <script type="module" src="js/cart.js"></script>
+  </body>
+</html>
+
+<!-- <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyBRCfSCWNmL0W2dvS-AxpSSYocjaM32coo",
+    authDomain: "e-shopping-baacc.firebaseapp.com",
+    projectId: "e-shopping-baacc",
+    storageBucket: "e-shopping-baacc.firebasestorage.app",
+    messagingSenderId: "188192593595",
+    appId: "1:188192593595:web:6bde8a346d1bcc64cabb9e",
+    measurementId: "G-MQG7S3CFZ2"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script> -->

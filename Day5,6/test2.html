@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add Product</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background: #f0f0f0;
+      }
+      form {
+        background: #fff;
+        padding: 20px;
+        max-width: 400px;
+        margin: auto;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      input,
+      select,
+      button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        font-size: 16px;
+      }
+      button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      .message {
+        text-align: center;
+        margin-top: 20px;
+        font-weight: bold;
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <h2 style="text-align: center">Add New Product</h2>
+
+    <form id="productForm">
+      <input type="text" id="name" placeholder="Product Name" required />
+      <input
+        type="number"
+        id="price"
+        placeholder="Price"
+        step="0.01"
+        required
+      />
+      <input type="text" id="imageURL" placeholder="Image URL" required />
+
+      <select id="categoryId" required>
+        <option value="">Select Category</option>
+        <option value="1">Top Sales</option>
+        <option value="2">New Arrivals</option>
+        <option value="3">Hot Sales</option>
+      </select>
+
+      <button type="submit">Add Product</button>
+    </form>
+
+    <div class="message" id="message"></div>
+
+    <!-- Firebase App and Database SDKs -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+      import {
+        getDatabase,
+        ref,
+        get,
+        child,
+        set,
+      } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBRCfSCWNmL0W2dvS-AxpSSYocjaM32coo",
+        authDomain: "e-shopping-baacc.firebaseapp.com",
+        projectId: "e-shopping-baacc",
+        storageBucket: "e-shopping-baacc.firebasestorage.app",
+        messagingSenderId: "188192593595",
+        appId: "1:188192593595:web:6bde8a346d1bcc64cabb9e",
+        measurementId: "G-MQG7S3CFZ2",
+        databaseURL: "https://e-shopping-baacc-default-rtdb.firebaseio.com",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+
+      document
+        .getElementById("productForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const name = document.getElementById("name").value.trim();
+          const price = parseFloat(document.getElementById("price").value);
+          const imageURL = document.getElementById("imageURL").value.trim();
+          const categoryid = parseInt(
+            document.getElementById("categoryId").value
+          );
+          const message = document.getElementById("message");
+
+          if (!name || !price || !imageURL || isNaN(categoryid)) {
+            alert("Please fill in all fields correctly.");
+            return;
+          }
+
+          const dbRef = ref(db);
+
+          try {
+            const snapshot = await get(child(dbRef, "products"));
+            const data = snapshot.exists() ? snapshot.val() : {};
+            const itemNumbers = Object.keys(data)
+              .map((key) => parseInt(key.replace("item", "")))
+              .filter((n) => !isNaN(n));
+
+            const nextNumber =
+              itemNumbers.length > 0 ? Math.max(...itemNumbers) + 1 : 1;
+            const nextKey = `item${nextNumber}`;
+
+            const newProduct = { name, price, imageURL, categoryid }; // <-- updated key
+
+            await set(child(ref(db, "products"), nextKey), newProduct);
+
+            message.textContent = `✅ Product added as ${nextKey}`;
+            message.style.color = "green";
+            document.getElementById("productForm").reset();
+          } catch (error) {
+            console.error("Error:", error);
+            message.textContent = "❌ Failed to add product.";
+            message.style.color = "red";
+          }
+        });
+    </script>
+  </body>
+</html>

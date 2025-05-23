@@ -1,0 +1,10 @@
+Read about all OOPS concept in Java.
+
+Learn about Classes, Objects, Access Modifiers.
+
+Read about Collections in Java and all the methods.
+
+Learn about Interface in Java
+
+Learn about Error Handling
+

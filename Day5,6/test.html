@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>E-Shopping Products</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        padding: 20px;
+      }
+      .product {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin: 10px;
+        padding: 20px;
+        width: 250px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .product img {
+        width: 100%;
+        border-radius: 5px;
+      }
+      .product h2 {
+        font-size: 18px;
+        margin: 10px 0 5px;
+      }
+      .product p {
+        margin: 5px 0;
+        font-weight: bold;
+      }
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Product List</h1>
+    <div class="container" id="productContainer"></div>
+
+    <!-- Firebase App and Database SDKs -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+      import {
+        getDatabase,
+        ref,
+        onValue,
+      } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
+
+      // Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyBRCfSCWNmL0W2dvS-AxpSSYocjaM32coo",
+        authDomain: "e-shopping-baacc.firebaseapp.com",
+        projectId: "e-shopping-baacc",
+        storageBucket: "e-shopping-baacc.firebasestorage.app",
+        messagingSenderId: "188192593595",
+        appId: "1:188192593595:web:6bde8a346d1bcc64cabb9e",
+        measurementId: "G-MQG7S3CFZ2",
+        databaseURL: "https://e-shopping-baacc-default-rtdb.firebaseio.com",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const database = getDatabase(app);
+
+      // Reference to products
+      const productRef = ref(database, "products");
+
+      // Fetch and display products
+      onValue(productRef, (snapshot) => {
+        const products = snapshot.val();
+        const container = document.getElementById("productContainer");
+        container.innerHTML = ""; // Clear existing content
+
+        for (const key in products) {
+          const product = products[key];
+          const div = document.createElement("div");
+          div.className = "product";
+          div.innerHTML = `
+        <img src="${product.imageURL}" alt="${product.name}">
+        <h2>${product.name}</h2>
+        <p>Price: $${product.price}</p>
+      `;
+          container.appendChild(div);
+        }
+      });
+    </script>
+  </body>
+</html>
+
+<!-- cart.html -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart Page</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="custom-navbar">
+      <div class="custom-navbar-container">
+        <ul class="menu-items">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li>
+            <a href="cart.html">Cart (<span id="cart-item-count">0</span>)</a>
+          </li> -->
+<!-- <li><a href="checkout.html">Checkout</a></li> -->
+<!-- </ul>
+        <div class="logo">
+          <img src="https://i.postimg.cc/TP6JjSTt/logo.webp" alt="" />
+        </div>
+      </div>
+    </nav>
+
+    <section class="cart-items">
+      <div class="container-cartt">
+        <div id="cart-container">
+          <p id="cart-data"></p>
+          <p id="empty-cart" style="display: none">Your cart is empty.</p>
+        </div>
+        <div class="cart-summary">
+          <h3>Order Summary</h3>
+          <p>Total: $<span id="cart-total">0.00</span></p>
+          <button
+            class="button primary"
+            onclick="location.href='checkout.html'"
+          >
+            Proceed to Checkout
+          </button>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="f-design">
+        <div class="f-design-txt container">
+          <p>© 2025 E-Shop. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+    <script type="module" src="js/cart.js"></script>
+  </body>
+</html> -->
+
+<!-- product.html -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Page</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="custom-navbar">
+      <div class="custom-navbar-container">
+        <ul class="menu-items">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li>
+            <a href="cart.html">Cart (<span id="cart-item-count">0</span>)</a>
+          </li>
+        </ul>
+        <div class="logo">
+          <img src="https://i.postimg.cc/TP6JjSTt/logo.webp" alt="" />
+        </div>
+      </div>
+    </nav>
+
+    <div class="container my-5">
+      <div class="row" id="product-details"></div>
+    </div>
+
+    <footer>
+      <div class="f-design">
+        <div class="f-design-txt container">
+          <p>© 2025 E-Shop. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+      import {
+        getDatabase,
+        ref,
+        onValue,
+      } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBRCfSCWNmL0W2dvS-AxpSSYocjaM32coo",
+        authDomain: "e-shopping-baacc.firebaseapp.com",
+        projectId: "e-shopping-baacc",
+        storageBucket: "e-shopping-baacc.firebasestorage.app",
+        messagingSenderId: "188192593595",
+        appId: "1:188192593595:web:6bde8a346d1bcc64cabb9e",
+        measurementId: "G-MQG7S3CFZ2",
+        databaseURL: "https://e-shopping-baacc-default-rtdb.firebaseio.com",
+      };
+
+      // Initialize Firebase app & Realtime Database
+      const app = initializeApp(firebaseConfig);
+      const database = getDatabase(app);
+
+      function displayProductDetails() {
+        const params = new URLSearchParams(window.location.search);
+        const productKey = params.get("id");
+
+        const productsRef = ref(database, "products");
+
+        onValue(productsRef, (snapshot) => {
+          const products = snapshot.val();
+          const product = products[productKey];
+
+          const productDetails = document.getElementById("product-details");
+          if (!product || !productDetails) return;
+
+          productDetails.innerHTML = `
+        <div class="col-md-6">
+          <img src="${product.imageURL}" class="img-fluid product-img" alt="${
+            product.name
+          }">
+        </div>
+        <div class="col-md-6">
+          <h2>${product.name}</h2>
+          <p><strong>Price:</strong> $${product.price.toFixed(2)}</p>
+          <button class="btn btn-primary me-2" onclick="addToCart('${productKey}')">Add to Cart</button>
+          <a href="checkout.html" class="btn btn-success">Buy Now</a>
+        </div>
+      `;
+        });
+      }
+
+      window.addEventListener("DOMContentLoaded", displayProductDetails);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="js/cart.js"></script>
+  </body>
+</html> -->

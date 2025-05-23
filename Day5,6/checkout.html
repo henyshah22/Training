@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout Page</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="custom-navbar">
+      <div class="custom-navbar-container">
+        <ul class="menu-items">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li>
+            <a href="cart.html">Cart (<span id="cart-item-count">0</span>)</a>
+          </li>
+          <!-- <li><a href="checkout.html">Checkout</a></li> -->
+        </ul>
+        <div class="logo">
+          <img src="https://i.postimg.cc/TP6JjSTt/logo.webp" alt="" />
+        </div>
+      </div>
+    </nav>
+
+    <div class="contain my-5">
+      <h1 class="text-center mb-4">Checkout</h1>
+      <div class="row">
+        <div class="col-md-6">
+          <form id="checkout-form">
+            <div class="mb-3">
+              <label for="name" class="form-label">Full Name</label>
+              <input type="text" class="form-control" id="name" required />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" required />
+            </div>
+            <div class="mb-3">
+              <label for="address" class="form-label">Address</label>
+              <textarea class="form-control" id="address" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="card" class="form-label">Card Number</label>
+              <input type="text" class="form-control" id="card" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Place Order</button>
+          </form>
+        </div>
+        <div class="col-md-6">
+          <h4>Order Summary</h4>
+          <div id="order-summary"></div>
+          <h5>Total: $<span id="order-total">0.00</span></h5>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="f-design">
+        <div class="f-design-txt container">
+          <p>© 2025 E-Shop. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="js/cart.js"></script>
+  </body>
+</html>
