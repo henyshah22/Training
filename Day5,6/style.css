@@ -14,18 +14,13 @@ body {
   margin: 0 auto;
 }
 
-/* //........top text ........// */
-
 :root {
-  /* //....... Color ........// */
   --primary-color: #ff3c78;
   --light-black: rgba(0, 0, 0, 0.89);
   --black: #000;
   --white: #fff;
   --grey: #aaa;
 }
-
-/* //........top text ........// */
 
 .top-txt {
   background-color: var(--black);
@@ -44,8 +39,6 @@ body {
   color: rgba(255, 255, 255, 0.945);
   margin: 0 10px;
 }
-
-/* //........ custom-navbar ........// */
 
 .custom-navbar {
   box-shadow: 0 5px 4px rgb(146 161 176 / 15%);
@@ -224,8 +217,6 @@ body {
   }
 }
 
-/* //........ Home ........// */
-
 .home_page img {
   height: auto;
   width: 100%;
@@ -295,8 +286,6 @@ body {
   margin-right: 15px;
   font-size: 18px;
 }
-
-/* //........ Collections ........// */
 
 .collections {
   display: flex;
@@ -384,8 +373,6 @@ body {
   top: 50%;
 }
 
-/* //........ Content 2 ........// */
-
 .content2 {
   width: 330px;
   margin: 20px;
@@ -464,8 +451,6 @@ body {
   opacity: 1;
   top: 50%;
 }
-
-/* //........ Content 3 ........// */
 
 .content3 {
   width: 330px;

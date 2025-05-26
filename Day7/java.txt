@@ -1,10 +1,136 @@
-Read about all OOPS concept in Java.
+* Read about all OOPS concept in Java.
+OOPS stands for Object-Oriented Programming System. It’s a programming paradigm based on the concept of objects, which can contain data (fields) and code (methods).
+Encapsulation	                 Data hiding	                               Private variables + getters/setters
+Inheritance	                     Code reuse	                                   extends keyword
+Polymorphism	                 Multiple forms of a method/action	           Method overloading & overriding
+Abstraction	                     Hide complexity	                           Abstract classes, interfaces
+-Encapsulation
+Definition: Wrapping data (variables) and code (methods) together as a single unit (class).
+Goal: To hide the internal state of an object and protect it from outside interference and misuse.
+How: Use private variables and provide public getter/setter methods.
+-Inheritance
+Definition: Mechanism where one class acquires the properties (fields) and behaviors (methods) of another class.
+Goal: To promote code reuse and establish a relationship between classes.
+How: Use extends keyword.
+-Polymorphism
+Definition: Ability of a method or object to take multiple forms.
+Goal: To perform a single action in different ways.
+Types:
+Compile-time polymorphism (method overloading): Same method name with different parameters.
+Run-time polymorphism (method overriding): Subclass provides a specific implementation of a method defined in superclass.
+-Abstraction
+Definition: Hiding complex implementation details and showing only the necessary features.
+Goal: Simplify usage and increase security by hiding internal details.
+How: Using abstract classes and interfaces.
 
-Learn about Classes, Objects, Access Modifiers.
+* Learn about Classes, Objects, Access Modifiers.
+-Objects
+A class is a blueprint for creating objects.
+It defines properties (variables) and methods (functions).
+-Classes
+An object is an instance of a class.
+You create objects using the new keyword.
+-Access Modifiers
+Modifier	                  Symbol	                     Meaning
+Public	                      (default)	                     Anyone can access
+Private	                       #	                         Only inside the class
+Protected	                  (not native)	                 Simulated with _name (convention only)
 
-Read about Collections in Java and all the methods.
 
-Learn about Interface in Java
+* Read about Collections in Java and all the methods.
+Collections in Java are data structures used to store, access, and manipulate groups of objects.
+All collections are part of the java.util package.
+-Main Interfaces in the Java Collections Framework (JCF):
+Interface	                   Description	                             Common Implementations
+List	                       Ordered, allows duplicates	             ArrayList, LinkedList
+Set	                           Unordered, no duplicates	                 HashSet, LinkedHashSet, TreeSet
+Queue	                       FIFO (first in, first out)	             LinkedList, PriorityQueue
+Map	                           Key-value pairs	                         HashMap, TreeMap, LinkedHashMap
+-Common List methods:
+add()
+remove()
+get(index)
+set(index, value)
+size()
+contains()
+clear()
+-Common Set methods:
+add()
+remove()
+contains()
+size()
+clear()
+-Common Map methods:
+put(key, value)
+get(key)
+remove(key)
+containsKey(key)
+containsValue(value)
+keySet()
+values()
+entrySet()
+-Common Queue methods:
+add()
+offer()
+poll() – removes and returns head
+peek() – returns head without removing
+isEmpty()
+Type	    Allows Duplicates	        Ordered	                  Key-Value
+List	         Yes	                  Yes	                     No
+Set	              No	           No (except LinkedHashSet)	     No
+Map	            No (keys)	       No (unless LinkedHashMap)	     Yes
+Queue	          Yes	                  Yes (FIFO)	             No
 
-Learn about Error Handling
+
+* Learn about Interface in Java
+An interface in Java is like a contract.
+It contains abstract methods (no body) that a class must implement.
+Think of it as a way to say:
+“If a class uses this interface, it must provide behavior for all the listed methods.”
+-Why use Interfaces?
+To achieve abstraction.
+To support multiple inheritance (Java doesn’t allow multiple class inheritance, but interfaces solve this).
+To ensure consistency in class behavior.
+-Feature	                        Interface
+  Methods	                   Abstract (no body, by default)
+  Variables	                   public static final by default
+  Inheritance	               A class uses implements
+  Multiple Inheritance	       Yes (can implement multiple interfaces)
+-Summary
+Use interface keyword.
+Implement using implements.
+No constructors in interfaces.
+Interfaces support multiple inheritance.
+Java 8+ supports default and static methods in interfaces.
+
+
+* Learn about Error Handling
+Error handling in Java is how you manage unexpected problems (errors or exceptions) that can crash your program.
+Java uses try-catch blocks to handle these problems gracefully.
+-Types of Problems in Java
+Errors – Serious issues (like memory errors), usually not handled by code.
+Exceptions – Issues that can be handled, like:
+File not found
+Divide by zero
+Invalid input
+-Finally Block
+This block always runs, whether an exception happened or not.
+Used for clean-up code, like closing files or connections.
+-Keyword	                Use
+  try	           Wrap code that might throw exception
+  catch	           Handle the exception
+  finally	       Run code no matter what
+  throw	           Manually throw an exception
+  throws	       Declare a method might throw exception
+
+
+
+
+
+
+string[] args is used to take command line arguments.
+In Java, the public class name must match the filename.
+index starts with 0. 
+Multiple inheritance is not supported in java.
+You cannot extend more than one class in Java.
 
