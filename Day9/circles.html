@@ -15,6 +15,7 @@
         for (let i = 0; i < 6; i++) {
           color += letters[Math.floor(Math.random() * 16)];
         }
+        // Loops 6 times to randomly choose 6 hex characters.
         return color;
       }
 
@@ -41,13 +42,17 @@
       function dropHandler(ev) {
         ev.preventDefault();
         const data = ev.dataTransfer.getData("circle");
+        // retieves the id of the dragged one
         const draggedCircle = document.getElementById(data);
 
         const dropTarget = ev.target.classList.contains("circle")
           ? ev.target
           : ev.target.closest(".circle");
+        // Determines the drop target (only valid if it’s a .circle).
+        // If ev.target isn’t a circle but is inside one, closest(".circle") finds the closest ancestor that is.
 
         if (!dropTarget) return;
+        // stop if no valid drop target found
 
         draggedCircle.style.position = "absolute";
         draggedCircle.style.top = "50%";
