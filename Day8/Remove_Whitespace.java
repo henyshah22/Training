@@ -1,25 +1,24 @@
 // Write a program to remove whitespaces from a given String. (Without using any inbuilt functions) String - "WELCOME TO MV CLOUDS"
 
 package Day8;
+import java.util.Scanner;
 public class Remove_Whitespace {
-
     public static void main(String[] args) {
-        String text = "WELCOME TO MV CLOUDS";
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter: ");
+        String text = scanner.nextLine();
         String result = removeWhitespaces(text);
-        System.out.println("Original String: " + text);
-        System.out.println("Without Whitespaces: " + result);
+        System.out.println("Output: " + result);
+        scanner.close();
     }
-
     public static String removeWhitespaces(String str) {
-        char[] charArray = str.toCharArray();
-        // Converts the input string into a character array.
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (char c : charArray) {
-            if (c != ' ' && c != '\t' && c != '\n') {
-                stringBuilder.append(c);
+        String result = "";
+        for (int i = 0; i < str.length(); i++) {
+            char currentChar = str.charAt(i);
+            if (currentChar != ' ' && currentChar != '\t' && currentChar != '\n') {
+                result += currentChar; 
             }
         }
-        return stringBuilder.toString();
+        return result;
     }
 }

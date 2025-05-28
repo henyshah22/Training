@@ -1,26 +1,31 @@
 // Write a program to check if a List of integers contains only odd numbers.
+import java.util.Scanner;
 
-class odd_number {
-    
-    static int getOddOccurrence(int arr[], int arr_size)
-    {
-        int i;
-        for (i = 0; i < arr_size; i++) {
-            int count = 0;
-            for (int j = 0; j < arr_size; j++) {
-                if (arr[i] == arr[j])
-                    count++;
+public class odd_number {
+    static boolean allOdd(int[] arr) {
+        for (int num : arr) {
+            if (num % 2 == 0) {
+                return false;  
             }
-            if (count % 2 != 0)
-                return arr[i];
         }
-        return -1;
+        return true;  
     }
-    
-    public static void main(String[] args)
-    {
-        int arr[] = new int[]{ 2, 3, 5, 4, 5, 2, 4, 3, 5, 2, 4, 4, 2 };
-        int n = arr.length;
-        System.out.println(getOddOccurrence(arr, n));
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter: ");
+        String input = scanner.nextLine();
+        String[] tokens = input.trim().split("\\s+");
+
+        int[] arr = new int[tokens.length];
+        for (int i = 0; i < tokens.length; i++) {
+            arr[i] = Integer.parseInt(tokens[i]);
+        }
+        if (allOdd(arr)) {
+            System.out.println("odd");
+        } else {
+            System.out.println("not odd");
+        }
+
+        scanner.close();
     }
 }

@@ -32,7 +32,7 @@ An object is an instance of a class.
 You create objects using the new keyword.
 -Access Modifiers
 Modifier	                  Symbol	                     Meaning
-Public	                      (default)	                     Anyone can access
+Public	                      (default)	                    Anyone can access
 Private	                       #	                         Only inside the class
 Protected	                  (not native)	                 Simulated with _name (convention only)
 

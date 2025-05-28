@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.circle {
+  border-radius: 50%;
+  position: relative;
+}
+
+.blue {
+  width: 250px;
+  height: 250px;
+  background-color: blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}

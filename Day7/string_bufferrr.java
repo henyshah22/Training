@@ -13,6 +13,9 @@ public class string_bufferrr {
         System.out.println(str);
     }
 }
+//  Diff between string and string buffer 
+// The main difference between String and StringBuffer in Java is their mutability and how they handle memory. String is immutable, meaning its content cannot be changed once created. StringBuffer, on the other hand, is mutable, allowing for modifications to its content without creating new objects. This difference impacts performance, memory usage, and thread safety. 
+// methods:
 
 
 

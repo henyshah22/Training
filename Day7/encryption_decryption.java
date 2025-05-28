@@ -43,3 +43,7 @@ public class encryption_decryption {
         }
     }
 }
+
+
+// ASCII char + 5 - encrypt
+// - 5 decrypt

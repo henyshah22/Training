@@ -1,6 +1,7 @@
 // "Write a java program to reverse each word in a given string. (Ex. ""My name is Khan"" => ""Khan is name My"")"
 
 package Day8;
+import java.util.Scanner;
 import java.util.regex.Pattern; 
 public class Reverse_Word { 
 
@@ -19,7 +20,10 @@ public class Reverse_Word {
     } 
     public static void main(String[] args) 
     { 
-        String s = "My name is Khan"; 
-        System.out.println(reverseWords(s)); 
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter: ");
+        String s = scanner.nextLine();
+        System.out.println("Reversed: " + reverseWords(s));
+        scanner.close();
     } 
 }

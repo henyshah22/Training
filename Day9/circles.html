@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Circles</title>
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      let currentSize = 200;
+      let circleCounter = 1;
+
+      function getRandomColor() {
+        const letters = "0123456789ABCDEF";
+        let color = "#";
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
+      function createDraggableCircle(size) {
+        const circle = document.createElement("div");
+        circle.id = `circle-${circleCounter++}`;
+        circle.className = "circle";
+        circle.style.width = `${size}px`;
+        circle.style.height = `${size}px`;
+        circle.style.backgroundColor = getRandomColor();
+        circle.setAttribute("draggable", "true");
+        circle.addEventListener("dragstart", dragstartHandler);
+        return circle;
+      }
+
+      function dragstartHandler(ev) {
+        ev.dataTransfer.setData("circle", ev.target.id);
+      }
+
+      function dragoverHandler(ev) {
+        ev.preventDefault();
+      }
+
+      function dropHandler(ev) {
+        ev.preventDefault();
+        const data = ev.dataTransfer.getData("circle");
+        const draggedCircle = document.getElementById(data);
+
+        const dropTarget = ev.target.classList.contains("circle")
+          ? ev.target
+          : ev.target.closest(".circle");
+
+        if (!dropTarget) return;
+
+        draggedCircle.style.position = "absolute";
+        draggedCircle.style.top = "50%";
+        draggedCircle.style.left = "50%";
+        draggedCircle.style.transform = "translate(-50%, -50%)";
+
+        dropTarget.appendChild(draggedCircle);
+
+        if (currentSize > 10) {
+          currentSize = currentSize * 0.8;
+          const newCircle = createDraggableCircle(currentSize);
+          document.querySelector(".container").appendChild(newCircle);
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div
+        id="circle-0"
+        class="circle"
+        style="width: 200px; height: 200px; background-color: red"
+        draggable="true"
+        ondragstart="dragstartHandler(event)"
+      ></div>
+
+      <div
+        class="circle blue"
+        ondrop="dropHandler(event)"
+        ondragover="dragoverHandler(event)"
+      ></div>
+    </div>
+  </body>
+</html>
