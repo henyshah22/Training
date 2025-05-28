@@ -26,7 +26,6 @@ public class Encryt_Decrypt {
             int decryptedAscii = encryptedAscii - 5;
             char decryptedChar = (char) decryptedAscii;
 
-            // Print ASCII values and chars
             System.out.println("Decrypting char '" + c + "' (ASCII: " + encryptedAscii + ") to '"
                     + decryptedChar + "' (ASCII: " + decryptedAscii + ")");
 
